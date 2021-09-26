@@ -87,12 +87,20 @@ function getSectionNames() {
 
 function getSectionsItems() {
     return {
-        head: Object.keys(head),
-        accessory: Object.keys(accessory),
-        body: Object.keys(body),
-        face: Object.keys(face),
+        head: head,
+        accessory: accessory,
+        body: body,
+        face: face,
     }
-
-} 
+}
 
 export {accessory, face, body, head, getSectionNames, getSectionsItems};
+
+// function getSectionsItems() {
+//     return {
+//         head: Object.keys(head),
+//         accessory: Object.keys(accessory),
+//         body: Object.keys(body),
+//         face: Object.keys(face),
+//     }
+// }

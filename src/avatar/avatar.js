@@ -14,27 +14,16 @@ const Avatar = ({style, accessory, body, face, head, facialHair, poseType}) => {
         ctxRef.current = ctx;
         setImages();
 
-        // const positions = getElementsPositions();
-
-        // loadImages({type: 'body', imgName: body, positions});
-        // loadImages({type: 'head', imgName: head, positions});
-        // loadImages({type: 'accessory', imgName: accessory, positions});
-        // loadImages({type: 'face', imgName: face, positions});
-
     }, []);
 
     useEffect(() => {
+        const can = document.getElementById('av-canvas');
+        const canvasWidth = can.width;
+        const canvasHeight = can.height;
+
+        ctxRef.current.clearRect(0, 0, canvasWidth, canvasHeight);
         setImages();
     }, [accessory, body, face, head, facialHair, poseType]);
-
-    const setImages = () => {
-        const positions = getElementsPositions();
-
-        loadImages({type: 'body', imgName: body, positions});
-        loadImages({type: 'head', imgName: head, positions});
-        loadImages({type: 'accessory', imgName: accessory, positions});
-        loadImages({type: 'face', imgName: face, positions});
-    }
 
     const getElementsPositions = () => {
         const xPosition = avatarSize.body.width / 2;
@@ -60,13 +49,21 @@ const Avatar = ({style, accessory, body, face, head, facialHair, poseType}) => {
         return config;
     }
 
+    const setImages = () => {
+        const positions = getElementsPositions();
+
+        loadImages({type: 'body', imgName: body, positions});
+        loadImages({type: 'head', imgName: head, positions});
+        loadImages({type: 'accessory', imgName: accessory, positions});
+        loadImages({type: 'face', imgName: face, positions});
+    }
+
+
     const loadImages = ({type, imgName, positions}) => {
         const image = new Image();
         image.src = avatarParts[type][imgName];
 
         image.onload = function() {
-            // const xPosition = avatarSize[type].width / 2; // center
-            // const yPosition = avatarSize[type].yPosition;
             const xPosition = positions[type].xPosition;
             const yPosition =  positions[type].yPosition;
             console.log(type, xPosition, yPosition);
@@ -76,7 +73,6 @@ const Avatar = ({style, accessory, body, face, head, facialHair, poseType}) => {
 
     return (
         <div>
-            {/* <img src={avatarParts.body[body]} /> */}
             <canvas id="av-canvas" style={style}></canvas>
         </div>
     );
@@ -84,21 +80,3 @@ const Avatar = ({style, accessory, body, face, head, facialHair, poseType}) => {
 }
 
 export default Avatar;
-
-    // const canvasWidth = style.width;
-    // const canvasHeighet = style.height;
-
-
-    // const wrh = image.width / image.height;
-    // let newWidth = canvasWidth;
-    // let newHeight = newWidth / wrh;
-    // if (newHeight > canvasHeighet) {
-    //             newHeight = canvasHeighet;
-    //     newWidth = newHeight * wrh;
-    //   }
-    //   let xOffset = newWidth < canvasWidth ? ((canvasWidth - newWidth) / 2) : 0;
-    //   let yOffset = newHeight < canvasHeighet ? ((canvasHeighet - newHeight) / 2) : 0;
-
-    // console.log(xOffset, yOffset, newWidth, newHeight)
-
-    // ctxRef.current.drawImage(image, xOffset, yOffset, newWidth, newHeight);

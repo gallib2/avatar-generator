@@ -4,7 +4,7 @@ import AvatarGenerator from './avatar-generator/avatar-generator';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="Appheader">
         <AvatarGenerator />
       </header>
     </div>
